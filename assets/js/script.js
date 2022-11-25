@@ -80,7 +80,7 @@ allSaveBtnsEl.click(getCardID);
 allSaveBtnsEl.click(saveText);
 allClearBtnsEl.click(getCardID);
 confirmBtnEl.click(proceedDelete);
-setInterval(updateClass, 60000);
+setInterval(updateClass, 1000);
 
 // Function to get card ID
 function getCardID(event) {
