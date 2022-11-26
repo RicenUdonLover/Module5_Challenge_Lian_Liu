@@ -4,10 +4,12 @@ var mainContainerEl = $('#mainContainer');
 var modalEl = $('#confirmDelete');
 var cancelBtnEl = $('#cancelBtn');
 var confirmBtnEl = $('#confirmBtn');
+var liveTimeEL = $('<h1>')
 var currentDay = dayjs().format('[Today is] dddd, MMMM Do');
 var currentHour24 = dayjs().format('H');
 var currentHourID = "hour-" + currentHour24;
 var currentHour12 = dayjs().format('hA');
+var liveTime = dayjs().format('h:mm:ss A')
 var cardEl = "";
 var hourEl = "";
 var textAreasEl = "";
@@ -18,6 +20,8 @@ var selectCardByID = "";
 
 // Show the current day and hour in header
 currentDayEl.text(currentDay);
+liveTimeEL.text(liveTime);
+headerEl.append(liveTimeEL);
 // Generate timeblocks
 var renderTimeBlock = function () {
   for (let i = 8; i < 19; i++) {
@@ -80,7 +84,7 @@ allSaveBtnsEl.click(getCardID);
 allSaveBtnsEl.click(saveText);
 allClearBtnsEl.click(getCardID);
 confirmBtnEl.click(proceedDelete);
-setInterval(updateClass, 60000);
+setInterval(liveTimeUpdate, 1000);
 
 // Function to get card ID
 function getCardID(event) {
@@ -118,7 +122,9 @@ function loadText() {
   }
 }
 // Function to automatically change the color of timeblocks if the hour is changed
-function updateClass() {
+function liveTimeUpdate() {
+  liveTime = dayjs().format('h:mm:ss A')
+  liveTimeEL.text(liveTime)
   var liveHourID = "hour-" + dayjs().format('H');
   var livePresentCard = $('#' + liveHourID);
   var oldPresentCard = $('.present');
